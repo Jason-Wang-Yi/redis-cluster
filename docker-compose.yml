@@ -1,0 +1,59 @@
+version: "3"
+services:
+  redis-slave1:
+    image: redis:6.0.5
+    container_name: node4
+    working_dir: /config
+    environment:
+      - PORT=6394
+    ports:
+      - 6394:6394
+      - 16394:16394
+    stdin_open: true
+    network_mode: host
+    tty: true
+    privileged: true
+    volumes:
+      - ./config:/config
+    entrypoint:
+      - /bin/bash
+      - redis.sh
+    restart: always
+  redis-slave2:
+    image: redis:6.0.5
+    working_dir: /config
+    container_name: node5
+    environment:
+      - PORT=6395
+    ports:
+      - 6395:6395
+      - 16395:16395
+    stdin_open: true
+    network_mode: host
+    tty: true
+    privileged: true
+    volumes:
+      - ./config:/config
+    entrypoint:
+      - /bin/bash
+      - redis.sh
+    restart: always
+  redis-slave3:
+    image: redis:6.0.5
+    container_name: node6
+    working_dir: /config
+    environment:
+      - PORT=6396
+    ports:
+      - 6396:6396
+      - 16396:16396
+    stdin_open: true
+    network_mode: host
+    tty: true
+    privileged: true
+    volumes:
+      - ./config:/config
+    entrypoint:
+      - /bin/bash
+      - redis.sh
+    restart: always
